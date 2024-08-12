@@ -19,4 +19,4 @@ elif choice == 'Hotel Comments':
     st.write(hotel_comments)
 elif choice == 'Hotel Comments Recommendation':
     st.subheader("hotel_comments_recommendation")
-   subprocess.run([f"{sys.executable}", "cosin_gensim.py"])
+    subprocess.run([f"{sys.executable}", "cosin_gensim.py"])
