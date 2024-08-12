@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import subprocess
+import nbformat
 
 st.title("Trung tam tin hoc")
 st.subheader("How to run streamlit app")
@@ -18,5 +19,9 @@ elif choice == 'Hotel Comments':
     st.write(hotel_comments)
 elif choice == 'Hotel Comments Recommendation':
     st.subheader("hotel_comments_recommendation")
-    # Run the 'cosin_gensim.py' script
-    subprocess.call(["python", "cosin_gensim.py"])
+    # Load the Jupyter Notebook file
+    with open("cosin_gensim.ipynb", "r") as f:
+        nb = nbformat.read(f, as_version=4)
+    
+    # Display the Jupyter Notebook in Streamlit
+    st.notebook(nb)
