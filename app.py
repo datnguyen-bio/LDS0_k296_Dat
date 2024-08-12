@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import subprocess
+import streamlit_jupyter
 
 st.title("Trung tam tin hoc")
 st.subheader("How to run streamlit app")
@@ -19,4 +20,4 @@ elif choice == 'Hotel Comments':
 elif choice == 'Hotel Comments Recommendation':
     st.subheader("hotel_comments_recommendation")
     # Run the 'cosin_gensim.ipynb' notebook
-    subprocess.call(["jupyter", "notebook", "cosin_gensim.ipynb"])
+    streamlit_jupyter.notebook("cosin_gensim.ipynb")
