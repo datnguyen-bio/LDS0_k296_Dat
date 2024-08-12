@@ -14,7 +14,7 @@ elif choice == 'About':
     st.subheader("Trung tam tin hoc")
 elif choice == 'Hotel Comments':
     st.subheader("hotel_comments")
-    hotel_comments = pd.read_csv("hotel_comment.csv")
+    hotel_comments = pd.read_csv("hotel_comments_6.csv")
     st.write(hotel_comments)
 elif choice == 'Hotel Comments Recommendation':
     st.subheader("hotel_comments_recommendation")
