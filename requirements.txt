@@ -1,4 +1,4 @@
-gensim==3.8.3
+gensim==4.2.0
 pandas==1.2.3
 sumy==0.8.1
 nltk==3.5
