@@ -1,13 +1,7 @@
-# %%
 import csv
-from collections import defaultdict
-import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 import gensim
 from gensim import corpora
 
-# %%
 # Load the hotel comments data
 comments = []
 hotel_ids = []
@@ -33,27 +27,15 @@ tfidf_corpus = tfidf[corpus]
 # Calculate the cosine similarity matrix using Gensim
 similarity_matrix = gensim.similarities.SparseMatrixSimilarity(tfidf_corpus, num_features=len(dictionary))
 
-# Define a function to get the top N most similar hotel IDs
-def get_top_n_similar(comment_index, n=5):
+def get_top_n_similar(user_input, n=5):
+    try:
+        comment_index = comments.index(user_input)
+    except ValueError:
+        raise ValueError("The input string was not found in the comments data.")
+
     sims = similarity_matrix[tfidf_corpus[comment_index]]
     sorted_sims = sorted(enumerate(sims), key=lambda item: -item[1])
     similar_indices = [i for i, _ in sorted_sims[1:n+1]]
     similar_scores = [score for _, score in sorted_sims[1:n+1]]
     similar_hotel_ids = [hotel_ids[i] for i in similar_indices]
     return similar_hotel_ids, similar_scores
-
-
-# %%
-# Example
-target_comment_index = 4
-top_n_similar, top_n_scores = get_top_n_similar(target_comment_index, n=5)
-
-print(f"Target comment: {comments[target_comment_index]}")
-print("Hotel ID của comment có mức similar cao nhất với target:")
-for i, (comment, score) in enumerate(zip(top_n_similar, top_n_scores), start=1):
-    print(f"{i}. {comment} (Similarity score: {score:.2f})")
-
-# %%
-
-
-
