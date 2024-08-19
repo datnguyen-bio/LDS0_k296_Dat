@@ -103,13 +103,13 @@ if st.session_state.selected_hotel_id:
     selected_hotel = df_hotels[df_hotels['Hotel ID'] == st.session_state.selected_hotel_id]
 
     # Display the selected hotel information
-    st.write("## Bảng dữ liệu review thô, về khách sạn (chỉ bằng tiếng Việt):")
+    st.write("### Bảng dữ liệu review thô, về khách sạn (chỉ bằng tiếng Việt):")
     st.dataframe(selected_hotel)
 
     # Basic EDA
     st.write("#### Khoảng cách của khách sạn đến bãi biển/trung tâm (theo booking.com)")
 
-    # Get the distance of the hotel from the selected hotel
+    # Get the distance of the hotel from the selected hotel beachfront
     distance_value = selected_hotel['beachfront'].values[0] if not selected_hotel.empty else None
     # Show the message based on distance value
     if pd.isna(distance_value):
@@ -117,13 +117,29 @@ if st.session_state.selected_hotel_id:
     else:
         st.write(f"Khoảng cách đến bãi biển là {distance_value} km.")
 
-     # Get the distance of the hotel from the selected hotel
+     # Get the distance of the hotel from the selected hotel distance
     distance_value2 = selected_hotel['distance'].values[0] if not selected_hotel.empty else None
     # Show the message based on distance value
     if pd.isna(distance_value2):
         st.write("Không có thông tin về khoảng cách tới trung tâm thành phố.")
     else:
         st.write(f"Khoảng cách đến trung tâm thành phố là {distance_value2} km.")
+
+    # Encoding 'Group Name' into categorical codes
+    selected_hotel['Group Name Code'] = selected_hotel['Group Name'].astype('category').cat.codes
+    
+    # Calculate the correlation matrix
+    correlation_matrix = selected_hotel[['Group Name Code', 'Score', 'stay_day', 'stay_month']].corr()
+    
+    # Display the correlation matrix
+    st.write("#### Correlation Matrix")
+    st.dataframe(correlation_matrix)
+    
+    # Draw heatmap
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
+    plt.title('Correlation Heatmap')
+    st.pyplot(plt)
 
     # Show basic statistics
     st.write("#### Thống kê mô tả về khách sạn")
