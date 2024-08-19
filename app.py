@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 # function cần thiết
 def get_recommendations(df, hotel_id, cosine_sim, nums=5):
