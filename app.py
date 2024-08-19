@@ -124,22 +124,21 @@ if st.session_state.selected_hotel_id:
         st.write("Không có thông tin về khoảng cách tới trung tâm thành phố.")
     else:
         st.write(f"Khoảng cách đến trung tâm thành phố là {distance_value2} km.")
+        
 
     # Encoding 'Group Name' into categorical codes
     selected_hotel['Group Name Code'] = selected_hotel['Group Name'].astype('category').cat.codes
-    
     # Calculate the correlation matrix
-    correlation_matrix = selected_hotel[['Group Name Code', 'Score', 'stay_day', 'stay_month']].corr()
-    
+    correlation_matrix = selected_hotel[['Group Name Code', 'Score', 'stay_days_duration', 'stay_month']].corr()
     # Display the correlation matrix
     st.write("#### Correlation Matrix")
     st.dataframe(correlation_matrix)
-    
     # Draw heatmap
     plt.figure(figsize=(8, 6))
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
     plt.title('Correlation Heatmap')
     st.pyplot(plt)
+    
 
     # Show basic statistics
     st.write("#### Thống kê mô tả về khách sạn")
