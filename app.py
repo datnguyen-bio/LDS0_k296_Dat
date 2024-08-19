@@ -149,9 +149,11 @@ if st.session_state.selected_hotel_id:
     numerical_cols = numerical_cols.drop(columns=['num','distance', 'beachfront'], errors='ignore')
     st.write(numerical_cols.describe())
 
-    # Draw line chart for Score vs. stay_month
-    st.write("#### Line Chart of Score vs. Stay Month")
-    st.line_chart(selected_hotel.set_index('stay_month')['Score'])
+   # Calculate average score per stay_month
+    average_scores = selected_hotel.groupby('stay_month')['Score'].mean().reset_index()
+    # Draw line chart for average Score vs. stay_month
+    st.write("#### Line Chart of Average Score vs. Stay Month")
+    st.line_chart(average_scores.set_index('stay_month')['Score'])
 
     # Show the count of ratings
     st.write("#### Phân phối điểm đánh giá")
