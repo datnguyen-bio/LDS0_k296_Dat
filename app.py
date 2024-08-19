@@ -173,10 +173,26 @@ if st.session_state.selected_hotel_id:
 
     # Calculate average score by Room Type and Group Name
     st.write("#### Điểm trung bình theo loại phòng và loại khách hàng")
-    average_scores2 = selected_hotel.groupby(['Room Type', 'Group Name'])['Score'].mean().reset_index()
-    # Display the average scores
-    st.write("#### Average Score by Room Type and Group Name")
-    st.dataframe(average_scores2)
+    # average_scores2 = selected_hotel.groupby(['Room Type', 'Group Name'])['Score'].mean().reset_index()
+    # # Display the average scores
+    # st.dataframe(average_scores2)
+
+    # Calculate average score by Room Type and Group Name
+    average_scores2 = (
+        selected_hotel.groupby(['Room Type', 'Group Name'])['Score']
+        .mean()
+        .unstack()
+    )
+    
+    # Create a heatmap
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(average_scores2, annot=True, cmap='coolwarm', fmt='.2f', cbar_kws={'label': 'Average Score'})
+    plt.xlabel('Group Name')
+    plt.ylabel('Room Type')
+    
+    # Display the heatmap in Streamlit
+    #st.write("#### Heatmap of Average Score by Room Type and Group Name")
+    st.pyplot(plt)
 
     if not selected_hotel.empty:
         st.write('#### Bạn vừa chọn:')
