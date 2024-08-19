@@ -85,12 +85,12 @@ if 'selected_hotel_id' not in st.session_state:
 hotel_options = [(row['Hotel_Name'], row['Hotel ID']) for index, row in st.session_state.random_hotels.iterrows()]
 st.session_state.random_hotels
 
-# Tạo một dropdown với options là các tuple này
-selected_hotel = st.selectbox(
-    "Chọn khách sạn",
-    options=hotel_options,
-    format_func=lambda x: x[0]  # Hiển thị tên khách sạn
-)
+# # Tạo một dropdown với options là các tuple này
+# selected_hotel = st.selectbox(
+#     "Chọn khách sạn",
+#     options=hotel_options,
+#     format_func=lambda x: x[0]  # Hiển thị tên khách sạn
+# )
 # Display the selected hotel
 st.write("Bạn đã chọn:", selected_hotel)
 
