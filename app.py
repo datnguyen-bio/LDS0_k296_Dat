@@ -5,7 +5,7 @@ import pickle
 # function cần thiết
 def get_recommendations(df, hotel_id, cosine_sim, nums=5):
     # Get the index of the hotel that matches the hotel_id
-    matching_indices = df.index[df['Hotel_ID'] == hotel_id].tolist()
+    matching_indices = df.index[df['Hotel ID'] == hotel_id].tolist()
     if not matching_indices:
         print(f"No hotel found with ID: {hotel_id}")
         return pd.DataFrame()  # Return an empty DataFrame if no match
@@ -63,7 +63,7 @@ if 'selected_hotel_id' not in st.session_state:
 
 # Theo cách cho người dùng chọn khách sạn từ dropdown
 # Tạo một tuple cho mỗi khách sạn, trong đó phần tử đầu là tên và phần tử thứ hai là ID
-hotel_options = [(row['Hotel_Name'], row['Hotel_ID']) for index, row in st.session_state.random_hotels.iterrows()]
+hotel_options = [(row['Hotel_Name'], row['Hotel ID']) for index, row in st.session_state.random_hotels.iterrows()]
 st.session_state.random_hotels
 # Tạo một dropdown với options là các tuple này
 selected_hotel = st.selectbox(
@@ -78,9 +78,9 @@ st.write("Bạn đã chọn:", selected_hotel)
 st.session_state.selected_hotel_id = selected_hotel[1]
 
 if st.session_state.selected_hotel_id:
-    st.write("Hotel_ID: ", st.session_state.selected_hotel_id)
+    st.write("Hotel ID: ", st.session_state.selected_hotel_id)
     # Hiển thị thông tin khách sạn được chọn
-    selected_hotel = df_hotels[df_hotels['Hotel_ID'] == st.session_state.selected_hotel_id]
+    selected_hotel = df_hotels[df_hotels['Hotel ID'] == st.session_state.selected_hotel_id]
 
     if not selected_hotel.empty:
         st.write('#### Bạn vừa chọn:')
