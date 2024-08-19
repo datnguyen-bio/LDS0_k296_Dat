@@ -77,6 +77,9 @@ with open('cosine_sim.pkl', 'rb') as f:
 ###### Giao diện Streamlit ######
 st.image('hotel.jpeg', use_column_width=True)
 
+st.write('# Phân tích dữ liệu cơ bản + Recomendation System: khách sạn ở Nha Trang ')
+st.write('#### Học viên: Nguyễn Thành Đạt')
+
 # Kiểm tra xem 'selected_hotel_id' đã có trong session_state hay chưa
 if 'selected_hotel_id' not in st.session_state:
     # Nếu chưa có, thiết lập giá trị mặc định là None hoặc ID khách sạn đầu tiên
@@ -172,7 +175,7 @@ if st.session_state.selected_hotel_id:
     st.bar_chart(selected_hotel['Score'].value_counts())
 
     # Calculate average score by Room Type and Group Name
-    st.write("#### Điểm trung bình theo loại phòng và loại khách hàng")
+    st.write("#### Điểm trung bình theo loại phòng và nhóm khách hàng")
     # average_scores2 = selected_hotel.groupby(['Room Type', 'Group Name'])['Score'].mean().reset_index()
     # # Display the average scores
     # st.dataframe(average_scores2)
@@ -186,8 +189,8 @@ if st.session_state.selected_hotel_id:
     # Create a heatmap
     plt.figure(figsize=(12, 8))
     sns.heatmap(average_scores2, annot=True, cmap='coolwarm', fmt='.2f', cbar_kws={'label': 'Average Score'})
-    plt.xlabel('Group Name')
-    plt.ylabel('Room Type')
+    plt.xlabel('Nhóm khách hàng')
+    plt.ylabel('Loại phòng')
     st.pyplot(plt)
 
     if not selected_hotel.empty:
@@ -195,7 +198,7 @@ if st.session_state.selected_hotel_id:
         st.write('### ', selected_hotel['Hotel_Name'].values[0])
 
         hotel_description = selected_hotel['Hotel_Description'].values[0]
-        truncated_description = ' '.join(hotel_description.split()[:100])
+        truncated_description = ' '.join(hotel_description.split()[:200])
         st.write('##### Thông tin:')
         st.write(truncated_description, '...')
 
