@@ -194,15 +194,15 @@ if st.session_state.selected_hotel_id:
     # st.pyplot(plt)
 
     # Calculate average score and occurrence count by Room Type and Group Name
-    average_scores = (
+    average_scores2 = (
         df_hotels.groupby(['Room Type', 'Group Name'])['Score']
         .agg(['mean', 'count'])
         .reset_index()
     )
     
     # Prepare the data for the heatmap
-    heatmap_data = average_scores.pivot('Room Type', 'Group Name', 'mean')
-    occurrences_data = average_scores.pivot('Room Type', 'Group Name', 'count')
+    heatmap_data = average_scores2.pivot('Room Type', 'Group Name', 'mean')
+    occurrences_data = average_scores2.pivot('Room Type', 'Group Name', 'count')
     
     # Create a heatmap
     plt.figure(figsize=(12, 8))
@@ -214,9 +214,9 @@ if st.session_state.selected_hotel_id:
     plt.xticks(rotation=45, ha='right')
     plt.yticks(rotation=0)
 
-# Display the heatmap in Streamlit
-st.write("#### Heatmap of Average Score by Room Type and Group Name")
-st.pyplot(plt)
+    # Display the heatmap in Streamlit
+    #st.write("#### Heatmap of Average Score by Room Type and Group Name")
+    st.pyplot(plt)
 
     if not selected_hotel.empty:
         st.write('#### Bạn vừa chọn:')
