@@ -1,1 +1,4 @@
 gensim
+streamlit
+pandas
+gensim
