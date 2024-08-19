@@ -43,8 +43,8 @@ def display_recommended_hotels(recommended_hotels, cols=5):
 
 # Đọc dữ liệu khách sạn
 df_hotels = pd.read_csv('hotel_comments_4.csv')
-# Lấy 10 khách sạn
-random_hotels = df_hotels.head(n=10)
+# Lấy 20 khách sạn
+random_hotels = df_hotels.sample(n=20, random_state=1)
 # print(random_hotels)
 
 st.session_state.random_hotels = random_hotels
