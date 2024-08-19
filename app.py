@@ -47,7 +47,7 @@ def display_recommended_hotels(recommended_hotels, cols=5):
 df_hotels = pd.read_csv('hotel_comments_4.csv')
 #df_hotels = df_hotels.drop_duplicates(subset='Hotel ID', keep='first')
 # Lấy 20 khách sạn
-random_hotels = df_hotels.sample(n=20, random_state=1)
+random_hotels = df_hotels.sample(n=40, random_state=1)
 # print(random_hotels)
 
 # # Input for hotel ID
@@ -175,13 +175,13 @@ if st.session_state.selected_hotel_id:
         st.write('#### Bạn vừa chọn:')
         st.write('### ', selected_hotel['Hotel_Name'].values[0])
 
-        hotel_description = selected_hotel['Hotel_Description'].values[0]
+        hotel_description = selected_hotel['Hotel_Description','beachfront'].values[0]
         truncated_description = ' '.join(hotel_description.split()[:100])
         st.write('##### Thông tin:')
         st.write(truncated_description, '...')
 
         st.write('##### Các khách sạn khác bạn cũng có thể quan tâm:')
-        recommendations = get_recommendations(df_hotels, st.session_state.selected_hotel_id, cosine_sim=cosine_sim_new, nums=3) 
-        display_recommended_hotels(recommendations, cols=3)
+        recommendations = get_recommendations(df_hotels, st.session_state.selected_hotel_id, cosine_sim=cosine_sim_new, nums=4) 
+        display_recommended_hotels(recommendations, cols=4)
     else:
         st.write(f"Không tìm thấy khách sạn với ID: {st.session_state.selected_hotel_id}")
