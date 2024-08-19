@@ -150,6 +150,7 @@ if st.session_state.selected_hotel_id:
     st.write(numerical_cols.describe())
 
     # Calculate average score per stay_month
+    st.write("#### Điểm số trung bình theo tháng")
     average_scores = selected_hotel.groupby('stay_month')['Score'].mean().reset_index()
     # Create a line chart
     plt.figure(figsize=(10, 6))
@@ -161,9 +162,9 @@ if st.session_state.selected_hotel_id:
     plt.xticks(range(1, 13))
     # Adjusting the y-axis to start from the minimum average score
     plt.ylim(bottom=min(average_scores['Score']) - 0.5)
-    plt.title('Average Score vs. Stay Month')
-    plt.xlabel('Stay Month')
-    plt.ylabel('Average Score')
+    #plt.title('Average Score vs. Stay Month')
+    plt.xlabel('Tháng')
+    plt.ylabel('Điểm trung bình')
     st.pyplot(plt)
 
     # Show the count of ratings
