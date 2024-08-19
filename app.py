@@ -183,15 +183,11 @@ if st.session_state.selected_hotel_id:
         .mean()
         .unstack()
     )
-    
     # Create a heatmap
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(13, 7))
     sns.heatmap(average_scores2, annot=True, cmap='coolwarm', fmt='.2f', cbar_kws={'label': 'Average Score'})
     plt.xlabel('Group Name')
     plt.ylabel('Room Type')
-    
-    # Display the heatmap in Streamlit
-    #st.write("#### Heatmap of Average Score by Room Type and Group Name")
     st.pyplot(plt)
 
     if not selected_hotel.empty:
