@@ -91,13 +91,13 @@ if st.session_state.selected_hotel_id:
     # Basic EDA
     st.write("### Phân tích dữ liệu cơ bản về khách sạn")
 
-    #khoảng cách
-    distance_value = selected_hotel['distance'].values[0] if not selected_hotel.empty else None
-    # Show the message
-    if distance_value is not None:
-        st.write(f"The distance of the hotel to the beach is {distance_value} km.")
+    # Get the distance of the hotel from the selected hotel
+    distance_value = selected_hotel['Distance'].values[0] if not selected_hotel.empty else None
+    # Show the message based on distance value
+    if pd.isna(distance_value):
+        st.write("No information about distance to the beach.")
     else:
-        st.write("No distance information available for this hotel.")
+        st.write(f"The distance of the hotel to the beach is {distance_value} km.")
 
     # Show basic statistics
     st.write("#### Thống kê mô tả về khách sạn")
