@@ -45,8 +45,26 @@ def display_recommended_hotels(recommended_hotels, cols=5):
 df_hotels = pd.read_csv('hotel_comments_4.csv')
 #df_hotels = df_hotels.drop_duplicates(subset='Hotel ID', keep='first')
 # Lấy 20 khách sạn
-random_hotels = df_hotels.sample(n=20, random_state=1)
+#random_hotels = df_hotels.sample(n=20, random_state=1)
 # print(random_hotels)
+
+# Input for hotel ID
+random_hotels = st.text_input("Enter Hotel ID:")
+
+# Check if input is a valid integer and exists in the DataFrame
+if random_hotels.isdigit():
+    random_hotels = int(random_hotels)
+    if random_hotels in df_hotels['Hotel ID'].values:
+        st.write(f"Hotel ID {random_hotels} exists.")
+        selected_hotel = df_hotels[df_hotels['Hotel ID'] == random_hotels]
+        
+        # Display the selected hotel information
+        st.write("Selected Hotel Information:")
+        st.dataframe(selected_hotel)
+    else:
+        st.write(f"Hotel ID {random_hotels} does not exist.")
+else:
+    st.write("Please enter a valid Hotel ID.")
 
 st.session_state.random_hotels = random_hotels
 
