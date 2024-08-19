@@ -184,7 +184,7 @@ if st.session_state.selected_hotel_id:
         .unstack()
     )
     # Create a heatmap
-    plt.figure(figsize=(13, 7))
+    plt.figure(figsize=(12, 8))
     sns.heatmap(average_scores2, annot=True, cmap='coolwarm', fmt='.2f', cbar_kws={'label': 'Average Score'})
     plt.xlabel('Group Name')
     plt.ylabel('Room Type')
