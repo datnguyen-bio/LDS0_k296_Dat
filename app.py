@@ -85,18 +85,21 @@ if st.session_state.selected_hotel_id:
     selected_hotel = df_hotels[df_hotels['Hotel ID'] == st.session_state.selected_hotel_id]
 
     # Display the selected hotel information
-    st.write("Selected Hotel Information:")
+    st.write("Bảng dữ liệu review thô, về khách sạn (chỉ bằng tiếng Việt):")
     st.dataframe(selected_hotel)
 
     # Basic EDA
-    st.write("### Basic EDA")
+    st.write("### Phân tích dữ liệu cơ bản về khách sạn")
     
     # Show basic statistics
-    st.write("#### Descriptive Statistics")
-    st.write(selected_hotel.describe())
+    st.write("#### Thống kê mô tả về khách sạn")
+    #st.write(selected_hotel.describe())
+    numerical_cols = selected_hotel.select_dtypes(include='number')
+    numerical_cols = numerical_cols.drop(columns=['Distance', 'Beachfront'], errors='ignore')
+    st.write(numerical_cols.describe())
 
     # Show the count of ratings
-    st.write("#### Count of Ratings")
+    st.write("#### Phân phối điểm đánh giá")
     st.bar_chart(selected_hotel['Score'].value_counts())
 
     if not selected_hotel.empty:
