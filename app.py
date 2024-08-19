@@ -176,47 +176,47 @@ if st.session_state.selected_hotel_id:
 
     # Calculate average score by Room Type and Group Name
     st.write("#### Điểm trung bình theo loại phòng và nhóm khách hàng")
-    # # average_scores2 = selected_hotel.groupby(['Room Type', 'Group Name'])['Score'].mean().reset_index()
+    # average_scores2 = selected_hotel.groupby(['Room Type', 'Group Name'])['Score'].mean().reset_index()
     # # # Display the average scores
     # # st.dataframe(average_scores2)
 
-    # # Calculate average score by Room Type and Group Name
-    # average_scores2 = (
-    #     selected_hotel.groupby(['Room Type', 'Group Name'])['Score']
-    #     .mean()
-    #     .unstack()
-    # )
-    # # Create a heatmap
-    # plt.figure(figsize=(12, 8))
-    # sns.heatmap(average_scores2, annot=True, cmap='coolwarm', fmt='.2f', cbar_kws={'label': 'Average Score'})
-    # plt.xlabel('Nhóm khách hàng')
-    # plt.ylabel('Loại phòng')
-    # st.pyplot(plt)
-
-    # Calculate average score and occurrence count by Room Type and Group Name
+    # Calculate average score by Room Type and Group Name
     average_scores2 = (
-        df_hotels.groupby(['Room Type', 'Group Name'])['Score']
-        .agg(['mean', 'count'])
-        .reset_index()
+        selected_hotel.groupby(['Room Type', 'Group Name'])['Score']
+        .mean()
+        .unstack()
     )
-    
-    # Prepare the data for the heatmap
-    heatmap_data = average_scores2.pivot('Room Type', 'Group Name', 'mean')
-    occurrences_data = average_scores2.pivot('Room Type', 'Group Name', 'count')
-    
     # Create a heatmap
     plt.figure(figsize=(12, 8))
-    sns.heatmap(heatmap_data, annot=occurrences_data, cmap='coolwarm', fmt='.2f',
-                cbar_kws={'label': f'Average Score (n={selected_hotel.shape[0]})'}, linewidths=.5, linecolor='gray')
-    #plt.title('Average Score by Room Type and Group Name', fontsize=16)
-    plt.xlabel('Nhóm khách hàng', fontsize=12)
-    plt.ylabel('Loại phòng', fontsize=12)
-    plt.xticks(rotation=45, ha='right')
-    plt.yticks(rotation=0)
-
-    # Display the heatmap in Streamlit
-    #st.write("#### Heatmap of Average Score by Room Type and Group Name")
+    sns.heatmap(average_scores2, annot=True, cmap='coolwarm', fmt='.2f', cbar_kws={'label': 'Average Score'})
+    plt.xlabel('Nhóm khách hàng')
+    plt.ylabel('Loại phòng')
     st.pyplot(plt)
+
+    # # Calculate average score and occurrence count by Room Type and Group Name
+    # average_scores2 = (
+    #     df_hotels.groupby(['Room Type', 'Group Name'])['Score']
+    #     .agg(['mean', 'count'])
+    #     .reset_index()
+    # )
+    
+    # # Prepare the data for the heatmap
+    # heatmap_data = average_scores2.pivot('Room Type', 'Group Name', 'mean')
+    # occurrences_data = average_scores2.pivot('Room Type', 'Group Name', 'count')
+    
+    # # Create a heatmap
+    # plt.figure(figsize=(12, 8))
+    # sns.heatmap(heatmap_data, annot=occurrences_data, cmap='coolwarm', fmt='.2f',
+    #             cbar_kws={'label': f'Average Score (n={selected_hotel.shape[0]})'}, linewidths=.5, linecolor='gray')
+    # #plt.title('Average Score by Room Type and Group Name', fontsize=16)
+    # plt.xlabel('Nhóm khách hàng', fontsize=12)
+    # plt.ylabel('Loại phòng', fontsize=12)
+    # plt.xticks(rotation=45, ha='right')
+    # plt.yticks(rotation=0)
+
+    # # Display the heatmap in Streamlit
+    # #st.write("#### Heatmap of Average Score by Room Type and Group Name")
+    # st.pyplot(plt)
 
     if not selected_hotel.empty:
         st.write('#### Bạn vừa chọn:')
