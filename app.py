@@ -43,6 +43,7 @@ def display_recommended_hotels(recommended_hotels, cols=5):
 
 # Đọc dữ liệu khách sạn
 df_hotels = pd.read_csv('hotel_comments_4.csv')
+df_hotels = df_hotels.drop_duplicates(subset='Hotel ID', keep='first')
 # Lấy 20 khách sạn
 random_hotels = df_hotels.sample(n=20, random_state=1)
 # print(random_hotels)
@@ -66,7 +67,7 @@ if 'selected_hotel_id' not in st.session_state:
 hotel_options = [(row['Hotel_Name'], row['Hotel ID']) for index, row in st.session_state.random_hotels.iterrows()]
 st.session_state.random_hotels
 
-hotel_options = list(set(hotel_options)) #NEW
+#hotel_options = list(set(hotel_options)) #NEW
 
 # Tạo một dropdown với options là các tuple này
 selected_hotel = st.selectbox(
