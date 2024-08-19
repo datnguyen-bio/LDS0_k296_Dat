@@ -171,11 +171,18 @@ if st.session_state.selected_hotel_id:
     st.write("#### Phân phối điểm đánh giá")
     st.bar_chart(selected_hotel['Score'].value_counts())
 
+    # Calculate average score by Room Type and Group Name
+    st.write("#### Điểm trung bình theo loại phòng và loại khách hàng")
+    average_scores2 = selected_hotel.groupby(['Room Type', 'Group Name'])['Score'].mean().reset_index()
+    # Display the average scores
+    st.write("#### Average Score by Room Type and Group Name")
+    st.dataframe(average_scores2)
+
     if not selected_hotel.empty:
         st.write('#### Bạn vừa chọn:')
         st.write('### ', selected_hotel['Hotel_Name'].values[0])
 
-        hotel_description = selected_hotel['Hotel_Description','beachfront'].values[0]
+        hotel_description = selected_hotel['Hotel_Description'].values[0]
         truncated_description = ' '.join(hotel_description.split()[:100])
         st.write('##### Thông tin:')
         st.write(truncated_description, '...')
