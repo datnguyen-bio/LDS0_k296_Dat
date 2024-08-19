@@ -67,8 +67,6 @@ if 'selected_hotel_id' not in st.session_state:
 hotel_options = [(row['Hotel_Name'], row['Hotel ID']) for index, row in st.session_state.random_hotels.iterrows()]
 st.session_state.random_hotels
 
-
-
 # Tạo một dropdown với options là các tuple này
 selected_hotel = st.selectbox(
     "Chọn khách sạn",
@@ -85,6 +83,21 @@ if st.session_state.selected_hotel_id:
     st.write("Hotel ID: ", st.session_state.selected_hotel_id)
     # Hiển thị thông tin khách sạn được chọn
     selected_hotel = df_hotels[df_hotels['Hotel ID'] == st.session_state.selected_hotel_id]
+
+    # Display the selected hotel information
+    st.write("Selected Hotel Information:")
+    st.dataframe(selected_hotel)
+
+    # Basic EDA
+    st.write("### Basic EDA")
+    
+    # Show basic statistics
+    st.write("#### Descriptive Statistics")
+    st.write(selected_hotel.describe())
+
+    # Show the count of ratings
+    st.write("#### Count of Ratings")
+    st.bar_chart(selected_hotel['Score'].value_counts())
 
     if not selected_hotel.empty:
         st.write('#### Bạn vừa chọn:')
