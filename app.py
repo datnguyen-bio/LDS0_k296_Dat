@@ -151,7 +151,7 @@ if st.session_state.selected_hotel_id:
 
     # Draw line chart for Score vs. stay_month
     st.write("#### Line Chart of Score vs. Stay Month")
-    st.line_chart(df_hotels.set_index('stay_month')['Score'])
+    st.line_chart(selected_hotel.set_index('stay_month')['Score'])
 
     # Show the count of ratings
     st.write("#### Phân phối điểm đánh giá")
