@@ -128,26 +128,30 @@ if st.session_state.selected_hotel_id:
         st.write(f"Khoảng cách đến trung tâm thành phố là {distance_value2} km.")
         
 
-    # Encoding 'Group Name' into categorical codes
-    selected_hotel['Group Name Code'] = selected_hotel['Group Name'].astype('category').cat.codes
-    # Calculate the correlation matrix
-    correlation_matrix = selected_hotel[['Group Name Code', 'Score', 'stay_days_duration', 'stay_month']].corr()
-    # Display the correlation matrix
-    st.write("#### Correlation Matrix")
-    st.dataframe(correlation_matrix)
-    # Draw heatmap
-    plt.figure(figsize=(8, 6))
-    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
-    plt.title('Correlation Heatmap')
-    st.pyplot(plt)
-    
+    # # Encoding 'Group Name' into categorical codes
+    # selected_hotel['Group Name Code'] = selected_hotel['Group Name'].astype('category').cat.codes
+    # # Calculate the correlation matrix
+    # correlation_matrix = selected_hotel[['Group Name Code', 'Score', 'stay_days_duration', 'stay_month']].corr()
+    # # Display the correlation matrix
+    # st.write("#### Correlation Matrix")
+    # st.dataframe(correlation_matrix)
+    # # Draw heatmap
+    # plt.figure(figsize=(8, 6))
+    # sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
+    # plt.title('Correlation Heatmap')
+    # st.pyplot(plt)
 
+    
     # Show basic statistics
     st.write("#### Thống kê mô tả về khách sạn")
     #st.write(selected_hotel.describe())
     numerical_cols = selected_hotel.select_dtypes(include='number')
     numerical_cols = numerical_cols.drop(columns=['num','distance', 'beachfront'], errors='ignore')
     st.write(numerical_cols.describe())
+
+    # Draw line chart for Score vs. stay_month
+    st.write("#### Line Chart of Score vs. Stay Month")
+    st.line_chart(df_hotels.set_index('stay_month')['Score'])
 
     # Show the count of ratings
     st.write("#### Phân phối điểm đánh giá")
