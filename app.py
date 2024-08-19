@@ -92,7 +92,7 @@ if st.session_state.selected_hotel_id:
     st.write("### Phân tích dữ liệu cơ bản về khách sạn")
 
     #khoảng cách
-    distance_value = selected_hotel['Distance'].values[0] if not selected_hotel.empty else None
+    distance_value = selected_hotel['distance'].values[0] if not selected_hotel.empty else None
     # Show the message
     if distance_value is not None:
         st.write(f"The distance of the hotel to the beach is {distance_value} km.")
