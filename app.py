@@ -89,7 +89,7 @@ if st.session_state.selected_hotel_id:
     st.dataframe(selected_hotel)
 
     # Basic EDA
-    st.write("### Phân tích dữ liệu cơ bản về khách sạn")
+    st.write("#### Khoảng cách của khách sạn đến bãi biển/trung tâm (theo booking.com)")
 
     # Get the distance of the hotel from the selected hotel
     distance_value = selected_hotel['beachfront'].values[0] if not selected_hotel.empty else None
@@ -111,7 +111,7 @@ if st.session_state.selected_hotel_id:
     st.write("#### Thống kê mô tả về khách sạn")
     #st.write(selected_hotel.describe())
     numerical_cols = selected_hotel.select_dtypes(include='number')
-    numerical_cols = numerical_cols.drop(columns=['distance', 'beachfront'], errors='ignore')
+    numerical_cols = numerical_cols.drop(columns=['num','distance', 'beachfront'], errors='ignore')
     st.write(numerical_cols.describe())
 
     # Show the count of ratings
