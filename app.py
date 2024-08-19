@@ -92,12 +92,20 @@ if st.session_state.selected_hotel_id:
     st.write("### Phân tích dữ liệu cơ bản về khách sạn")
 
     # Get the distance of the hotel from the selected hotel
-    distance_value = selected_hotel['Distance'].values[0] if not selected_hotel.empty else None
+    distance_value = selected_hotel['beachfront'].values[0] if not selected_hotel.empty else None
     # Show the message based on distance value
     if pd.isna(distance_value):
-        st.write("No information about distance to the beach.")
+        st.write("Không có thông tin về khoảng cách tới bãi biển.")
     else:
-        st.write(f"The distance of the hotel to the beach is {distance_value} km.")
+        st.write(f"Khoảng cách đến bãi biển là {distance_value} km.")
+
+     # Get the distance of the hotel from the selected hotel
+    distance_value2 = selected_hotel['distance'].values[0] if not selected_hotel.empty else None
+    # Show the message based on distance value
+    if pd.isna(distance_value2):
+        st.write("Không có thông tin về khoảng cách tới trung tâm thành phố.")
+    else:
+        st.write(f"Khoảng cách đến trung tâm thành phố là {distance_value2} km.")
 
     # Show basic statistics
     st.write("#### Thống kê mô tả về khách sạn")
