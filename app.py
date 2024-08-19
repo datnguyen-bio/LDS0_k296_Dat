@@ -149,11 +149,22 @@ if st.session_state.selected_hotel_id:
     numerical_cols = numerical_cols.drop(columns=['num','distance', 'beachfront'], errors='ignore')
     st.write(numerical_cols.describe())
 
-   # Calculate average score per stay_month
+    # Calculate average score per stay_month
     average_scores = selected_hotel.groupby('stay_month')['Score'].mean().reset_index()
-    # Draw line chart for average Score vs. stay_month
-    st.write("#### Line Chart of Average Score vs. Stay Month")
-    st.line_chart(average_scores.set_index('stay_month')['Score'])
+    # Create a line chart
+    plt.figure(figsize=(10, 6))
+    plt.plot(average_scores['stay_month'], average_scores['Score'], marker='o')
+    # Annotate average scores
+    for i, row in average_scores.iterrows():
+        plt.text(row['stay_month'], row['Score'] + 0.05, f"{row['Score']:.2f}", ha='center')
+    # Set x-ticks from 1 to 12
+    plt.xticks(range(1, 13))
+    # Adjusting the y-axis to start from the minimum average score
+    plt.ylim(bottom=min(average_scores['Score']) - 0.5)
+    plt.title('Average Score vs. Stay Month')
+    plt.xlabel('Stay Month')
+    plt.ylabel('Average Score')
+    st.pyplot(plt)
 
     # Show the count of ratings
     st.write("#### Phân phối điểm đánh giá")
