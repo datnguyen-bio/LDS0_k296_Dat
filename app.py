@@ -6,17 +6,17 @@ import seaborn as sns
 
 # Using menu
 st.title("Trung Tâm Tin Học")
-menu = ["1. Lý thuyết", "2. Phân tích dữ liệu", "3. Sentiment Analysis", "4. Recommendation System"]
+menu = ["0a. Trang chủ trung tâm","0b. testing","0c. Nhập thông tin cá nhân (test streamlit)", "1. Lý thuyết", "2. Phân tích dữ liệu", "3. Sentiment Analysis", "4. Recommendation System"]
 choice = st.sidebar.selectbox('Menu', menu)
 if choice == 'Home':    
     st.subheader("[Trang chủ](https://csc.edu.vn)")  
-elif choice == 'Capstone Project':    
+elif choice == '0b. testing':    
     st.subheader("[Đồ án TN Data Science](https://csc.edu.vn/data-science-machine-learning/Do-An-Tot-Nghiep-Data-Science---Machine-Learning_229)")
     st.write("""### Có 2 chủ đề trong khóa học:
     - Topic 1: Sentiment Analysis
     - Topic 2: Recommendation System
     - ...""")
-elif choice == 'Sử dụng các điều khiển':
+elif choice == '0. Nhập thông tin cá nhân (test streamlit)':
     # Sử dụng các điều khiển nhập
     # 1. Text
     st.subheader("1. Thông tin cá nhân")
@@ -90,6 +90,7 @@ elif choice == '1. Lý thuyết':
     st.pyplot(fig)
 # Done
 
+elif choice == '4. Recommendation System':
 # function cần thiết
 def get_recommendations(df, hotel_id, cosine_sim, nums=5):
     # Get the index of the hotel that matches the hotel_id
