@@ -6,7 +6,7 @@ import seaborn as sns
 
 # Using menu
 st.title("Trung Tâm Tin Học")
-menu = ["Home", "Capstone Project", "Sử dụng các điều khiển", "Hiển thị chart"]
+menu = ["1. Lý thuyết", "2. Phân tích dữ liệu", "3. Sentiment Analysis", "4. Recommendation System"]
 choice = st.sidebar.selectbox('Menu', menu)
 if choice == 'Home':    
     st.subheader("[Trang chủ](https://csc.edu.vn)")  
