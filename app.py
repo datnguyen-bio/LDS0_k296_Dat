@@ -220,6 +220,7 @@ elif choice == '2. Phân tích dữ liệu':
 # # Done
 
 elif choice == '3. Sentiment Analysis':
+    df_hotels = pd.read_csv('hotel_comments_4.csv')
     st.subheader("3. Sentiment Analysis")
 
     # Exploratory data analysis
