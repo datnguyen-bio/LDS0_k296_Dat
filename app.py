@@ -64,20 +64,18 @@ elif choice == '1. Lý thuyết':
 elif choice == '2. Phân tích dữ liệu':
     # 1.1. Line Chart
     st.subheader("2.1. Phân tích dữ liệu")
-
     ###### Giao diện Streamlit ######
     st.image('hotel.jpeg', use_column_width=True)
-    
     st.write('# Phân tích dữ liệu cơ bản')
 
     # Đọc dữ liệu khách sạn
     df_hotels = pd.read_csv('hotel_comments_4.csv')
     #df_hotels = df_hotels.drop_duplicates(subset='Hotel ID', keep='first')
-    # Lấy 20 khách sạn
-    random_hotels = df_hotels.sample(n=40, random_state=1)
-    # print(random_hotels)
+    # Lấy 40 khách sạn
+    #random_hotels = df_hotels.sample(n=40, random_state=1)
+    #print(random_hotels)
 
-    st.session_state.random_hotels = random_hotels
+    st.session_state.df_hotels = random_hotels
     
     # Kiểm tra xem 'selected_hotel_id' đã có trong session_state hay chưa
     if 'selected_hotel_id' not in st.session_state:
