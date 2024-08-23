@@ -210,7 +210,7 @@ elif choice == '2. Phân tích dữ liệu':
 
         #wordcloud
         st.write("#### Wordcloud")
-        text = ' '.join(selected_hotel['Processed_Body'])
+        text = selected_hotel['Processed_Body'].values[0] if not selected_hotel.empty else None
         wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
         # Display the word cloud
         fig, ax = plt.subplots(figsize=(10, 6))
