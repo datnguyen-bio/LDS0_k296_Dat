@@ -175,47 +175,7 @@ elif choice == '2. Phân tích dữ liệu':
         plt.xlabel('Nhóm khách hàng')
         plt.ylabel('Loại phòng')
         st.pyplot(plt)
-    
-#     df = pd.DataFrame({
-#         'x': [1, 2, 3, 4, 5],
-#         'y': [10, 20, 30, 40, 50]
-#     })
-#     st.line_chart(df)
-#     # 2. Area Chart
-#     st.subheader("2. Area Chart")
-#     st.area_chart(df)
-#     # 3. Bar Chart
-#     st.subheader("3. Bar Chart")
-#     df = pd.DataFrame({
-#         'x': [1, 2, 3, 4, 5],
-#         'y': [10, 20, 30, 40, 50]
-#     })
-#     # vẽ biểu đồ bằng matplotlib
-#     fig, ax = plt.subplots()
-#     ax.bar(df['x'], df['y'])
-#     st.pyplot(fig)    
-#     # 4. Plot Map
-#     st.subheader("4. Plot Map")
-#     df = pd.DataFrame({
-#         'lat': [21.03, 21.02, 21.01],
-#         'lon': [105.85, 105.86, 105.85],
-#         'name': ['Hàng Trống', 'Phan Chu Trinh', 'Lê Đại Hành']
-#     })
-#     st.map(df)
-#     # 5. Plot Data
-#     # Dùng thư viện seaborn
-#     st.subheader("5. Plot Data")
-#     # Tạo dataframe
-#     data = {
-#         'x': [1, 2, 3, 4, 5],
-#         'y': [10, 20, 30, 40, 50]
-#     }
-#     df = pd.DataFrame(data)
-#     # Vẽ biểu đồ
-#     fig, ax = plt.subplots()
-#     sns.lineplot(data=df, x='x', y='y', ax=ax)
-#     st.pyplot(fig)
-# # Done
+
 
 elif choice == '3. Sentiment Analysis':
     df_hotels = pd.read_csv('hotel_comments_4.csv')
@@ -238,10 +198,10 @@ elif choice == '3. Sentiment Analysis':
         tfidf_vectorizer = pickle.load(f)
     
     # Streamlit app
-    st.title("Text Classification")
+    st.title("Kiểm tra câu")
     
     # Allow the user to enter text
-    user_input = st.text_area("Enter text here:")
+    user_input = st.text_area("Nhập đoạn review:")
     
     # Classify the user input using the trained models
     if st.button("Classify"):
@@ -258,14 +218,14 @@ elif choice == '3. Sentiment Analysis':
             decision_tree_prediction = decision_tree_model.predict(X)[0]
     
             # Display the results
-            st.write("SVM Prediction:", svm_prediction)
-            st.write("Random Forest Prediction:", random_forest_prediction)
-            st.write("Naive Bayes Prediction:", naive_bayes_prediction)
-            st.write("Logistic Regression Prediction:", logistic_regression_prediction)
-            st.write("K-NN Prediction:", knn_prediction)
-            st.write("Decision Tree Prediction:", decision_tree_prediction)
+            st.write("Kết quả theo SVM:", svm_prediction)
+            st.write("Kết quả theo Random Forest:", random_forest_prediction)
+            st.write("Kết quả theo Naive Bayes:", naive_bayes_prediction)
+            st.write("Kết quả theo Logistic Regression:", logistic_regression_prediction)
+            st.write("Kết quả theo K-NN:", knn_prediction)
+            st.write("Kết quả theo Decision Tree:", decision_tree_prediction)
         else:
-            st.write("Please enter some text.")
+            st.write("Hãy nhập đoạn review.")
     
 elif choice == '4. Recommendation System':
     st.subheader("4. Recommendation System")
