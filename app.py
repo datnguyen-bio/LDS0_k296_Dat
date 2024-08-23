@@ -140,7 +140,7 @@ elif choice == '2. Phân tích dữ liệu':
             st.write(f"Điểm tiện nghi trung bình là {facilities}.")
 
         # value
-        value = selected_hotel['Value'].values[0] if not selected_hotel.empty else None
+        value = selected_hotel['Value_for_money'].values[0] if not selected_hotel.empty else None
         # Show the message based on distance value
         if pd.isna(value):
             st.write("Không có thông tin về điểm trung bình của sự đáng giá tiền.")
