@@ -60,26 +60,21 @@ elif choice == '2. Phân tích dữ liệu':
     # 2.2. Phân tích dữ liệu theo lựa chọn khách sạn
     st.subheader("2.2. Phân tích dữ liệu chung")
     # Display the data types
-    st.subheader("Data Types")
     st.write(df_hotels.dtypes)
-    
     # Display the summary statistics
     st.subheader("Summary Statistics")
     st.write(df_hotels.describe())
-    
     # Visualize the distribution of a numeric column
     st.subheader("Distribution of a Numeric Column")
     numeric_col = st.selectbox("Select a numeric column", df_hotels.select_dtypes(include='number').columns)
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.histplot(data=df_hotels, x=numeric_col, ax=ax)
     st.pyplot(fig)
-    
     # Visualize the correlation matrix
     st.subheader("Correlation Matrix")
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.heatmap(df_hotels.corr(), annot=True, cmap='YlOrRd', ax=ax)
     st.pyplot(fig)
-    
     # Allow the user to explore individual columns
     st.subheader("Explore Individual Columns")
     selected_column = st.selectbox("Select a column", df_hotels.columns)
