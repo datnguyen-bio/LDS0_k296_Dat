@@ -222,6 +222,32 @@ elif choice == '2. Phân tích dữ liệu':
 elif choice == '3. Sentiment Analysis':
     st.subheader("3. Sentiment Analysis")
 
+    # Exploratory data analysis
+    st.subheader("Exploratory Data Analysis")
+    
+    # Display the dataset statistics
+    st.write("Dataset Statistics:")
+    st.write(df_hotels.describe())
+    
+    # Plot the distribution of hotel ratings
+    st.write("Distribution of Hotel Ratings:")
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sns.histplot(df_hotels['Total_Score'], ax=ax)
+    st.pyplot(fig)
+    
+    # Plot the correlation matrix
+    st.write("Correlation Matrix:")
+    fig, ax = plt.subplots(figsize=(8, 6))
+    corr_matrix = df_hotels.corr()
+    sns.heatmap(corr_matrix, annot=True, cmap='YlOrRd', ax=ax)
+    st.pyplot(fig)
+    
+    # Allow users to filter the data
+    st.subheader("Filter the Data")
+    selected_hotel_id = st.selectbox("Select a Hotel ID", df_hotels['Hotel_Name'].unique())
+    hotel_data = df_hotels[df_hotels['Hotel ID'] == selected_hotel_id]
+    st.write(hotel_data)
+
 elif choice == '4. Recommendation System':
     st.subheader("4. Recommendation System")
     # function cần thiết
