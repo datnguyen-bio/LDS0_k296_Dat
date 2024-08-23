@@ -37,13 +37,25 @@ elif choice == '2. Phân tích dữ liệu':
     st.write("""### Bổ sung thông tin cho nơi lưu trú
     - website offline (.mhtml), 713 điểm lưu trú tại Nha Trang, từ booking.com, ngày 1/8/2024
     - crawl offline bằng BeautifulSoup
-    - lấy tên, khoảng cách đến bãi biển, khoản cách đến trung tâm thành phố.""")
+    - lấy tên, khoảng cách đến bãi biển (beachfront), khoảng cách đến trung tâm thành phố (distance).""")
     st.image('beautifulsoup.png', use_column_width=True)
     
     st.write("""### Đối với file thông tin của nơi lưu trú, bao gồm các bước sau:
     - Tạo cột Hotel_Name mới trên hotel_profile.csv = cột Hotel Name chỉ lấy giá trị trong ngoặc đơn
     - match Hotel_Name với tên trong dữ liệu booking.com
-    - ...""")
+    - 61 nơi lưu trú có thông tin beachfront, 54 có distance
+    - drop dòng trùng Hotel_Name', 'Hotel Address'""")
+    st.image('booking.png', use_column_width=True)
+
+    st.write("""### Đối với file thông tin của comment, bao gồm các bước sau:
+    - clean dữ liệu, xuất file csv
+    - drop dòng mà không có Hotel_ID trong hotel_profiles.csv
+    - drop dòng Body hoặc Title trống
+    - drop dòng 'Hotel ID', 'Reviewer Name', 'Body' trùng nhau
+    - tách Stay detail thành ngày, tháng, năm
+    - dùng langid để xác định ngôn ngữ Body, drop dòng mà Body != "vi"
+    - """)
+    st.image('comments.png', use_column_width=True)
 
     # 2.2. Phân tích dữ liệu theo lựa chọn khách sạn
     st.subheader("2.2. Phân tích dữ liệu chung")
