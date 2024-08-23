@@ -62,14 +62,19 @@ elif choice == '1. Lý thuyết':
 #         st.write("Bạn đang sống ở", location)
 
 elif choice == '2. Phân tích dữ liệu':
-    # 1.1. Line Chart
-    st.subheader("2.1. Phân tích dữ liệu")
-    ###### Giao diện Streamlit ######
+    df_hotels = pd.read_csv('hotel_comments_4.csv')
     st.image('hotel.jpeg', use_column_width=True)
     st.write('# Phân tích dữ liệu cơ bản')
 
+     # 2.2. Phân tích dữ liệu theo lựa chọn khách sạn
+    st.subheader("2.1. Phân tích dữ liệu chung")
+    ###### Giao diện Streamlit ######
+    
+    # 2.2. Phân tích dữ liệu theo lựa chọn khách sạn
+    st.subheader("2.2. Phân tích dữ liệu theo lựa chọn khách sạn")
+    ###### Giao diện Streamlit ######
+
     # Đọc dữ liệu khách sạn
-    df_hotels = pd.read_csv('hotel_comments_4.csv')
     #df_hotels = df_hotels.drop_duplicates(subset='Hotel ID', keep='first')
     # Lấy 40 khách sạn
     random_hotels = df_hotels.sample(n=40, random_state=1)
