@@ -70,11 +70,15 @@ elif choice == '2. Phân tích dữ liệu':
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.histplot(data=df_hotels, x=numeric_col, ax=ax)
     st.pyplot(fig)
+
+    cols_to_keep = ['Hotel_Rank', 'Total_Score', 'Location', 'Cleanliness','Service','Facilities','Value_for_money','Comfort_and_room_quality','beachfront','distance']
+    df_hotels2 = df_hotels[cols_to_keep]
     # Visualize the correlation matrix
     st.subheader("Correlation Matrix")
     fig, ax = plt.subplots(figsize=(8, 6))
-    sns.heatmap(df_hotels.corr(), annot=True, cmap='YlOrRd', ax=ax)
+    sns.heatmap(df_hotels2.corr(), annot=True, cmap='YlOrRd', ax=ax)
     st.pyplot(fig)
+    
     # Allow the user to explore individual columns
     st.subheader("Explore Individual Columns")
     selected_column = st.selectbox("Select a column", df_hotels.columns)
