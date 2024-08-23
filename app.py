@@ -107,7 +107,7 @@ elif choice == '2. Phân tích dữ liệu':
         selected_hotel = df_hotels[df_hotels['Hotel ID'] == st.session_state.selected_hotel_id]
 
     # Display the selected hotel information
-        st.write("### Bảng dữ liệu review thô, về khách sạn (chỉ bằng tiếng Việt):")
+        st.write("### Bảng dữ liệu review thô, về khách sạn đã chọn (chỉ bằng tiếng Việt):")
         st.dataframe(selected_hotel)
     
         # Basic EDA
@@ -129,46 +129,46 @@ elif choice == '2. Phân tích dữ liệu':
         else:
             st.write(f"Khoảng cách đến trung tâm thành phố là {distance_value2} km.")
     
-    df = pd.DataFrame({
-        'x': [1, 2, 3, 4, 5],
-        'y': [10, 20, 30, 40, 50]
-    })
-    st.line_chart(df)
-    # 2. Area Chart
-    st.subheader("2. Area Chart")
-    st.area_chart(df)
-    # 3. Bar Chart
-    st.subheader("3. Bar Chart")
-    df = pd.DataFrame({
-        'x': [1, 2, 3, 4, 5],
-        'y': [10, 20, 30, 40, 50]
-    })
-    # vẽ biểu đồ bằng matplotlib
-    fig, ax = plt.subplots()
-    ax.bar(df['x'], df['y'])
-    st.pyplot(fig)    
-    # 4. Plot Map
-    st.subheader("4. Plot Map")
-    df = pd.DataFrame({
-        'lat': [21.03, 21.02, 21.01],
-        'lon': [105.85, 105.86, 105.85],
-        'name': ['Hàng Trống', 'Phan Chu Trinh', 'Lê Đại Hành']
-    })
-    st.map(df)
-    # 5. Plot Data
-    # Dùng thư viện seaborn
-    st.subheader("5. Plot Data")
-    # Tạo dataframe
-    data = {
-        'x': [1, 2, 3, 4, 5],
-        'y': [10, 20, 30, 40, 50]
-    }
-    df = pd.DataFrame(data)
-    # Vẽ biểu đồ
-    fig, ax = plt.subplots()
-    sns.lineplot(data=df, x='x', y='y', ax=ax)
-    st.pyplot(fig)
-# Done
+#     df = pd.DataFrame({
+#         'x': [1, 2, 3, 4, 5],
+#         'y': [10, 20, 30, 40, 50]
+#     })
+#     st.line_chart(df)
+#     # 2. Area Chart
+#     st.subheader("2. Area Chart")
+#     st.area_chart(df)
+#     # 3. Bar Chart
+#     st.subheader("3. Bar Chart")
+#     df = pd.DataFrame({
+#         'x': [1, 2, 3, 4, 5],
+#         'y': [10, 20, 30, 40, 50]
+#     })
+#     # vẽ biểu đồ bằng matplotlib
+#     fig, ax = plt.subplots()
+#     ax.bar(df['x'], df['y'])
+#     st.pyplot(fig)    
+#     # 4. Plot Map
+#     st.subheader("4. Plot Map")
+#     df = pd.DataFrame({
+#         'lat': [21.03, 21.02, 21.01],
+#         'lon': [105.85, 105.86, 105.85],
+#         'name': ['Hàng Trống', 'Phan Chu Trinh', 'Lê Đại Hành']
+#     })
+#     st.map(df)
+#     # 5. Plot Data
+#     # Dùng thư viện seaborn
+#     st.subheader("5. Plot Data")
+#     # Tạo dataframe
+#     data = {
+#         'x': [1, 2, 3, 4, 5],
+#         'y': [10, 20, 30, 40, 50]
+#     }
+#     df = pd.DataFrame(data)
+#     # Vẽ biểu đồ
+#     fig, ax = plt.subplots()
+#     sns.lineplot(data=df, x='x', y='y', ax=ax)
+#     st.pyplot(fig)
+# # Done
 
 elif choice == '3. Sentiment Analysis':
     st.subheader("3. Sentiment Analysis")
