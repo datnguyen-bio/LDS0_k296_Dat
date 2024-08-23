@@ -9,11 +9,25 @@ st.title("Trung Tâm Tin Học")
 menu = ["0.blank", "1. Lý thuyết", "2. Phân tích dữ liệu", "3. Sentiment Analysis", "4. Recommendation System"]
 choice = st.sidebar.selectbox('Menu', menu)
 if choice == '0.blank':    
-    st.subheader("[Trang chủ](https://csc.edu.vn)")  
+    st.subheader("[Trang chủ](https://csc.edu.vn)")
+    st.write("Giảng viên hướng dẫn: ThS. Khuất Thùy Phương")
+    st.write("Học viên thực hiện: Nguyễn Thành Đạt")
     
 elif choice == '1. Lý thuyết':    
-    st.subheader("[Đồ án TN Data Science](https://csc.edu.vn/data-science-machine-learning/Do-An-Tot-Nghiep-Data-Science---Machine-Learning_229)")
-    st.write("""### Có 2 chủ đề trong khóa học:
+    st.subheader("[Đồ án tốt nghiệp Data Science](https://csc.edu.vn/data-science-machine-learning/Do-An-Tot-Nghiep-Data-Science---Machine-Learning_229)")
+    st.write("""### 1.1. Dữ liệu:
+    - Topic 1: Sentiment Analysis
+    - Topic 2: Recommendation System
+    - ...""")
+    st.write(""" 1.2. Phân tích dữ liệu:
+    - Topic 1: Sentiment Analysis
+    - Topic 2: Recommendation System
+    - ...""")
+    st.write(""" 1.3. Sentiment Analysis:
+    - Topic 1: Sentiment Analysis
+    - Topic 2: Recommendation System
+    - ...""")
+    st.write(""" 1.4. Recommendation System:
     - Topic 1: Sentiment Analysis
     - Topic 2: Recommendation System
     - ...""")
