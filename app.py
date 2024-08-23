@@ -38,7 +38,7 @@ elif choice == '2. Phân tích dữ liệu':
     - website offline (.mhtml), 713 điểm lưu trú tại Nha Trang, từ booking.com, ngày 1/8/2024
     - crawl offline bằng BeautifulSoup
     - lấy tên, khoảng cách đến bãi biển, khoản cách đến trung tâm thành phố.""")
-     st.image('beautifulsoup.png', use_column_width=True)
+    st.image('beautifulsoup.png', use_column_width=True)
     
     st.write("""### Đối với file thông tin của nơi lưu trú, bao gồm các bước sau:
     - Tạo cột Hotel_Name mới trên hotel_profile.csv = cột Hotel Name chỉ lấy giá trị trong ngoặc đơn
