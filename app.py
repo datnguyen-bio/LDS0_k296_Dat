@@ -21,24 +21,30 @@ elif choice == '1. Lý thuyết':
     - Dữ liệu cơ bản của các nơi lưu trú tại thành phố Nha Trang, tỉnh Khánh Hòa
     - Dữ liệu các Đánh giá (điểm) và Nhận xét của khách hàng về các nơi lưu trú đó""")
     st.write("""### 1.2. Phân tích dữ liệu:
-    - Phân tích EDA dữ liệu trên cả 02 file]
+    - Phân tích EDA dữ liệu trên cả 02 file
     - ...""")
     st.write("""### 1.3. Sentiment Analysis:
-    - Topic 1: Sentiment Analysis
-    - Topic 2: Recommendation System
     - ...""")
     st.write("""### 1.4. Recommendation System:
-    - Topic 1: Sentiment Analysis
-    - Topic 2: Recommendation System
     - ...""")
 
 elif choice == '2. Phân tích dữ liệu':
     df_hotels = pd.read_csv('hotel_comments_4.csv')
-    st.write('# Phân tích dữ liệu cơ bản')
+    st.write('# Phân tích dữ liệu')
 
     # 2.1. làm sạch dữ liệu
     st.subheader("2.1. Quá trình làm sạch dữ liệu")
+    st.write("""### Bổ sung thông tin cho nơi lưu trú
+    - website offline (.mhtml), 713 điểm lưu trú tại Nha Trang, từ booking.com, ngày 1/8/2024
+    - crawl offline bằng BeautifulSoup
+    - lấy tên, khoảng cách đến bãi biển, khoản cách đến trung tâm thành phố.""")
+
     
+    
+    st.write("""### Đối với file thông tin của nơi lưu trú, bao gồm các bước sau:
+    - Tạo cột Hotel_Name mới trên hotel_profile.csv = cột Hotel Name chỉ lấy giá trị trong ngoặc đơn
+    - match Hotel_Name với tên trong dữ liệu booking.com
+    - ...""")
 
     # 2.2. Phân tích dữ liệu theo lựa chọn khách sạn
     st.subheader("2.2. Phân tích dữ liệu chung")
@@ -314,25 +320,6 @@ elif choice == '4. Recommendation System':
     #df_hotels = df_hotels.drop_duplicates(subset='Hotel ID', keep='first')
     # Lấy 20 khách sạn
     random_hotels = df_hotels.sample(n=40, random_state=1)
-    # print(random_hotels)
-    
-    # # Input for hotel ID
-    # random_hotels = st.text_input("Enter Hotel ID:")
-    
-    # # Check if input is a valid integer and exists in the DataFrame
-    # if random_hotels.isdigit():
-    #     random_hotels = int(random_hotels)
-    #     if random_hotels in df_hotels['Hotel ID'].values:
-    #         st.write(f"Hotel ID {random_hotels} exists.")
-    #         selected_hotel = df_hotels[df_hotels['Hotel ID'] == random_hotels]
-            
-    #         # Display the selected hotel information
-    #         st.write("Selected Hotel Information:")
-    #         st.dataframe(selected_hotel)
-    #     else:
-    #         st.write(f"Hotel ID {random_hotels} does not exist.")
-    # else:
-    #     st.write("Please enter a valid Hotel ID.")
     
     st.session_state.random_hotels = random_hotels
     
@@ -372,43 +359,6 @@ elif choice == '4. Recommendation System':
         # Hiển thị thông tin khách sạn được chọn
         selected_hotel = df_hotels[df_hotels['Hotel_ID'] == st.session_state.selected_hotel_id]
     
-        # # Encoding 'Group Name' into categorical codes
-        # selected_hotel['Group Name Code'] = selected_hotel['Group Name'].astype('category').cat.codes
-        # # Calculate the correlation matrix
-        # correlation_matrix = selected_hotel[['Group Name Code', 'Score', 'stay_days_duration', 'stay_month']].corr()
-        # # Display the correlation matrix
-        # st.write("#### Correlation Matrix")
-        # st.dataframe(correlation_matrix)
-        # # Draw heatmap
-        # plt.figure(figsize=(8, 6))
-        # sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
-        # plt.title('Correlation Heatmap')
-        # st.pyplot(plt)
-    
-        # # Calculate average score and occurrence count by Room Type and Group Name
-        # average_scores2 = (
-        #     df_hotels.groupby(['Room Type', 'Group Name'])['Score']
-        #     .agg(['mean', 'count'])
-        #     .reset_index()
-        # )
-        
-        # # Prepare the data for the heatmap
-        # heatmap_data = average_scores2.pivot('Room Type', 'Group Name', 'mean')
-        # occurrences_data = average_scores2.pivot('Room Type', 'Group Name', 'count')
-        
-        # # Create a heatmap
-        # plt.figure(figsize=(12, 8))
-        # sns.heatmap(heatmap_data, annot=occurrences_data, cmap='coolwarm', fmt='.2f',
-        #             cbar_kws={'label': f'Average Score (n={selected_hotel.shape[0]})'}, linewidths=.5, linecolor='gray')
-        # #plt.title('Average Score by Room Type and Group Name', fontsize=16)
-        # plt.xlabel('Nhóm khách hàng', fontsize=12)
-        # plt.ylabel('Loại phòng', fontsize=12)
-        # plt.xticks(rotation=45, ha='right')
-        # plt.yticks(rotation=0)
-    
-        # # Display the heatmap in Streamlit
-        # #st.write("#### Heatmap of Average Score by Room Type and Group Name")
-        # st.pyplot(plt)
     
         if not selected_hotel.empty:
             st.write('#### Bạn vừa chọn:')
