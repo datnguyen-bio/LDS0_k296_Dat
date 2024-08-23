@@ -61,19 +61,14 @@ elif choice == '1. Lý thuyết':
 #         st.write("Bạn là ", occupation)
 #         st.write("Bạn đang sống ở", location)
 
-elif choice == '1. Lý thuyết':
+elif choice == '2. Phân tích dữ liệu':
     # 1.1. Line Chart
-    st.subheader("1.1. Tổng quan lý thuyết")
+    st.subheader("2.1. Phân tích dữ liệu")
 
     ###### Giao diện Streamlit ######
     st.image('hotel.jpeg', use_column_width=True)
     
-    st.write('# Phân tích dữ liệu cơ bản + Recomendation System: khách sạn ở Nha Trang ')
-    
-    # Kiểm tra xem 'selected_hotel_id' đã có trong session_state hay chưa
-    if 'selected_hotel_id' not in st.session_state:
-        # Nếu chưa có, thiết lập giá trị mặc định là None hoặc ID khách sạn đầu tiên
-        st.session_state.selected_hotel_id = None
+    st.write('# Phân tích dữ liệu cơ bản')
 
     # Đọc dữ liệu khách sạn
     df_hotels = pd.read_csv('hotel_comments_4.csv')
@@ -81,6 +76,11 @@ elif choice == '1. Lý thuyết':
     # Lấy 20 khách sạn
     random_hotels = df_hotels.sample(n=40, random_state=1)
     # print(random_hotels)
+    
+    # Kiểm tra xem 'selected_hotel_id' đã có trong session_state hay chưa
+    if 'selected_hotel_id' not in st.session_state:
+        # Nếu chưa có, thiết lập giá trị mặc định là None hoặc ID khách sạn đầu tiên
+        st.session_state.selected_hotel_id = None
 
     st.session_state.random_hotels = random_hotels
     
