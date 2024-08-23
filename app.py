@@ -73,7 +73,8 @@ elif choice == '2. Phân tích dữ liệu':
 
     cols_to_keep = ['Hotel_Rank', 'Total_Score', 'Location', 'Cleanliness','Service','Facilities','Value_for_money','Comfort_and_room_quality','beachfront','distance']
     df_hotels2 = df_hotels[cols_to_keep]
-    df_hotels2 = df_hotels2.dropna(how='any')
+    df_hotels2 = df_hotels2.apply(pd.to_numeric, errors='coerce')
+    #df_hotels2 = df_hotels2.dropna(how='any')
     # Visualize the correlation matrix
     st.subheader("Correlation Matrix")
     fig, ax = plt.subplots(figsize=(8, 6))
