@@ -3,7 +3,6 @@ import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
 import seaborn as sns
-from wordcloud import WordCloud
 
 # Using menu
 st.title("Trung Tâm Tin Học")
