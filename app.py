@@ -16,18 +16,17 @@ if choice == '0.blank':
 elif choice == '1. Lý thuyết':    
     st.subheader("[Đồ án tốt nghiệp Data Science](https://csc.edu.vn/data-science-machine-learning/Do-An-Tot-Nghiep-Data-Science---Machine-Learning_229)")
     st.write("""### 1.1. Dữ liệu:
+    2 file dữ liệu, bao gồm:
+    - Dữ liệu cơ bản của các nơi lưu trú tại thành phố Nha Trang, tỉnh Khánh Hòa
+    - Dữ liệu các Đánh giá (điểm) và Nhận xét của khách hàng về các nơi lưu trú đó""")
+    st.write("""### 1.2. Phân tích dữ liệu:
+    - Phân tích EDA dữ liệu trên cả 02 file]
+    - ...""")
+    st.write("""### 1.3. Sentiment Analysis:
     - Topic 1: Sentiment Analysis
     - Topic 2: Recommendation System
     - ...""")
-    st.write(""" 1.2. Phân tích dữ liệu:
-    - Topic 1: Sentiment Analysis
-    - Topic 2: Recommendation System
-    - ...""")
-    st.write(""" 1.3. Sentiment Analysis:
-    - Topic 1: Sentiment Analysis
-    - Topic 2: Recommendation System
-    - ...""")
-    st.write(""" 1.4. Recommendation System:
+    st.write("""### 1.4. Recommendation System:
     - Topic 1: Sentiment Analysis
     - Topic 2: Recommendation System
     - ...""")
@@ -65,6 +64,71 @@ elif choice == '1. Lý thuyết':
 elif choice == '1. Lý thuyết':
     # 1.1. Line Chart
     st.subheader("1.1. Tổng quan lý thuyết")
+
+    ###### Giao diện Streamlit ######
+    st.image('hotel.jpeg', use_column_width=True)
+    
+    st.write('# Phân tích dữ liệu cơ bản + Recomendation System: khách sạn ở Nha Trang ')
+    
+    # Kiểm tra xem 'selected_hotel_id' đã có trong session_state hay chưa
+    if 'selected_hotel_id' not in st.session_state:
+        # Nếu chưa có, thiết lập giá trị mặc định là None hoặc ID khách sạn đầu tiên
+        st.session_state.selected_hotel_id = None
+
+    # Đọc dữ liệu khách sạn
+    df_hotels = pd.read_csv('hotel_comments_4.csv')
+    #df_hotels = df_hotels.drop_duplicates(subset='Hotel ID', keep='first')
+    # Lấy 20 khách sạn
+    random_hotels = df_hotels.sample(n=40, random_state=1)
+    # print(random_hotels)
+
+    st.session_state.random_hotels = random_hotels
+    
+    # Theo cách cho người dùng chọn khách sạn từ dropdown
+    # Tạo một tuple cho mỗi khách sạn, trong đó phần tử đầu là tên và phần tử thứ hai là ID
+    hotel_options = [(row['Hotel_Name'], row['Hotel ID']) for index, row in st.session_state.random_hotels.iterrows()]
+    st.session_state.random_hotels
+    
+    # # Tạo một dropdown với options là các tuple này
+    selected_hotel = st.selectbox(
+        "Chọn khách sạn",
+        options=hotel_options,
+        format_func=lambda x: x[0]  # Hiển thị tên khách sạn
+    )
+    # Display the selected hotel
+    st.write("Bạn đã chọn:", selected_hotel)
+    
+    # Cập nhật session_state dựa trên lựa chọn hiện tại
+    st.session_state.selected_hotel_id = selected_hotel[1]
+    
+    if st.session_state.selected_hotel_id:
+        st.write("Hotel ID: ", st.session_state.selected_hotel_id)
+        # Hiển thị thông tin khách sạn được chọn
+        selected_hotel = df_hotels[df_hotels['Hotel ID'] == st.session_state.selected_hotel_id]
+
+    # Display the selected hotel information
+        st.write("### Bảng dữ liệu review thô, về khách sạn (chỉ bằng tiếng Việt):")
+        st.dataframe(selected_hotel)
+    
+        # Basic EDA
+        st.write("#### Khoảng cách của khách sạn đến bãi biển/trung tâm (theo booking.com)")
+    
+        # Get the distance of the hotel from the selected hotel beachfront
+        distance_value = selected_hotel['beachfront'].values[0] if not selected_hotel.empty else None
+        # Show the message based on distance value
+        if pd.isna(distance_value):
+            st.write("Không có thông tin về khoảng cách tới bãi biển.")
+        else:
+            st.write(f"Khoảng cách đến bãi biển là {distance_value} km.")
+    
+         # Get the distance of the hotel from the selected hotel distance
+        distance_value2 = selected_hotel['distance'].values[0] if not selected_hotel.empty else None
+        # Show the message based on distance value
+        if pd.isna(distance_value2):
+            st.write("Không có thông tin về khoảng cách tới trung tâm thành phố.")
+        else:
+            st.write(f"Khoảng cách đến trung tâm thành phố là {distance_value2} km.")
+    
     df = pd.DataFrame({
         'x': [1, 2, 3, 4, 5],
         'y': [10, 20, 30, 40, 50]
@@ -185,7 +249,6 @@ elif choice == '4. Recommendation System':
     st.image('hotel.jpeg', use_column_width=True)
     
     st.write('# Phân tích dữ liệu cơ bản + Recomendation System: khách sạn ở Nha Trang ')
-    st.write('#### Học viên: Nguyễn Thành Đạt')
     
     # Kiểm tra xem 'selected_hotel_id' đã có trong session_state hay chưa
     if 'selected_hotel_id' not in st.session_state:
@@ -214,29 +277,7 @@ elif choice == '4. Recommendation System':
         # Hiển thị thông tin khách sạn được chọn
         selected_hotel = df_hotels[df_hotels['Hotel ID'] == st.session_state.selected_hotel_id]
     
-        # Display the selected hotel information
-        st.write("### Bảng dữ liệu review thô, về khách sạn (chỉ bằng tiếng Việt):")
-        st.dataframe(selected_hotel)
-    
-        # Basic EDA
-        st.write("#### Khoảng cách của khách sạn đến bãi biển/trung tâm (theo booking.com)")
-    
-        # Get the distance of the hotel from the selected hotel beachfront
-        distance_value = selected_hotel['beachfront'].values[0] if not selected_hotel.empty else None
-        # Show the message based on distance value
-        if pd.isna(distance_value):
-            st.write("Không có thông tin về khoảng cách tới bãi biển.")
-        else:
-            st.write(f"Khoảng cách đến bãi biển là {distance_value} km.")
-    
-         # Get the distance of the hotel from the selected hotel distance
-        distance_value2 = selected_hotel['distance'].values[0] if not selected_hotel.empty else None
-        # Show the message based on distance value
-        if pd.isna(distance_value2):
-            st.write("Không có thông tin về khoảng cách tới trung tâm thành phố.")
-        else:
-            st.write(f"Khoảng cách đến trung tâm thành phố là {distance_value2} km.")
-            
+        
     
         # # Encoding 'Group Name' into categorical codes
         # selected_hotel['Group Name Code'] = selected_hotel['Group Name'].astype('category').cat.codes
