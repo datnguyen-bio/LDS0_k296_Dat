@@ -72,10 +72,10 @@ elif choice == '2. Phân tích dữ liệu':
     df_hotels = pd.read_csv('hotel_comments_4.csv')
     #df_hotels = df_hotels.drop_duplicates(subset='Hotel ID', keep='first')
     # Lấy 40 khách sạn
-    #random_hotels = df_hotels.sample(n=40, random_state=1)
+    random_hotels = df_hotels.sample(n=40, random_state=1)
     #print(random_hotels)
 
-    st.session_state.df_hotels = random_hotels
+    st.session_state.random_hotels = random_hotels
     
     # Kiểm tra xem 'selected_hotel_id' đã có trong session_state hay chưa
     if 'selected_hotel_id' not in st.session_state:
