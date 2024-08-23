@@ -107,8 +107,6 @@ elif choice == '2. Phân tích dữ liệu':
     # Display the selected hotel information
         st.write("### Bảng dữ liệu review thô, về khách sạn đã chọn (chỉ bằng tiếng Việt):")
         st.dataframe(selected_hotel)
-    
-        # Basic EDA
         st.write("#### Khoảng cách của khách sạn đến bãi biển/trung tâm (theo booking.com)")
     
         # Get the distance of the hotel from the selected hotel beachfront
@@ -126,6 +124,54 @@ elif choice == '2. Phân tích dữ liệu':
             st.write("Không có thông tin về khoảng cách tới trung tâm thành phố.")
         else:
             st.write(f"Khoảng cách đến trung tâm thành phố là {distance_value2} km.")
+
+        # Show basic statistics
+        st.write("#### Thống kê mô tả về khách sạn")
+        #st.write(selected_hotel.describe())
+        numerical_cols = selected_hotel.select_dtypes(include='number')
+        numerical_cols = numerical_cols.drop(columns=['num','distance', 'beachfront'], errors='ignore')
+        st.write(numerical_cols.describe())
+    
+        # Calculate average score per stay_month
+        st.write("#### Điểm số trung bình theo tháng")
+        average_scores = selected_hotel.groupby('stay_month')['Score'].mean().reset_index()
+        # Create a line chart
+        plt.figure(figsize=(10, 6))
+        plt.plot(average_scores['stay_month'], average_scores['Score'], marker='o')
+        # Annotate average scores
+        for i, row in average_scores.iterrows():
+            plt.text(row['stay_month'], row['Score'] + 0.05, f"{row['Score']:.2f}", ha='center')
+        # Set x-ticks from 1 to 12
+        plt.xticks(range(1, 13))
+        # Adjusting the y-axis to start from the minimum average score
+        plt.ylim(bottom=min(average_scores['Score']) - 0.5)
+        #plt.title('Average Score vs. Stay Month')
+        plt.xlabel('Tháng')
+        plt.ylabel('Điểm trung bình')
+        st.pyplot(plt)
+    
+        # Show the count of ratings
+        st.write("#### Phân phối điểm đánh giá")
+        st.bar_chart(selected_hotel['Score'].value_counts())
+    
+        # Calculate average score by Room Type and Group Name
+        st.write("#### Điểm trung bình theo loại phòng và nhóm khách hàng")
+        # average_scores2 = selected_hotel.groupby(['Room Type', 'Group Name'])['Score'].mean().reset_index()
+        # # # Display the average scores
+        # # st.dataframe(average_scores2)
+    
+        # Calculate average score by Room Type and Group Name
+        average_scores2 = (
+            selected_hotel.groupby(['Room Type', 'Group Name'])['Score']
+            .mean()
+            .unstack()
+        )
+        # Create a heatmap
+        plt.figure(figsize=(12, 8))
+        sns.heatmap(average_scores2, annot=True, cmap='coolwarm', fmt='.2f', cbar_kws={'label': 'Average Score'})
+        plt.xlabel('Nhóm khách hàng')
+        plt.ylabel('Loại phòng')
+        st.pyplot(plt)
     
 #     df = pd.DataFrame({
 #         'x': [1, 2, 3, 4, 5],
@@ -275,8 +321,6 @@ elif choice == '4. Recommendation System':
         # Hiển thị thông tin khách sạn được chọn
         selected_hotel = df_hotels[df_hotels['Hotel ID'] == st.session_state.selected_hotel_id]
     
-        
-    
         # # Encoding 'Group Name' into categorical codes
         # selected_hotel['Group Name Code'] = selected_hotel['Group Name'].astype('category').cat.codes
         # # Calculate the correlation matrix
@@ -289,55 +333,6 @@ elif choice == '4. Recommendation System':
         # sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
         # plt.title('Correlation Heatmap')
         # st.pyplot(plt)
-    
-        
-        # Show basic statistics
-        st.write("#### Thống kê mô tả về khách sạn")
-        #st.write(selected_hotel.describe())
-        numerical_cols = selected_hotel.select_dtypes(include='number')
-        numerical_cols = numerical_cols.drop(columns=['num','distance', 'beachfront'], errors='ignore')
-        st.write(numerical_cols.describe())
-    
-        # Calculate average score per stay_month
-        st.write("#### Điểm số trung bình theo tháng")
-        average_scores = selected_hotel.groupby('stay_month')['Score'].mean().reset_index()
-        # Create a line chart
-        plt.figure(figsize=(10, 6))
-        plt.plot(average_scores['stay_month'], average_scores['Score'], marker='o')
-        # Annotate average scores
-        for i, row in average_scores.iterrows():
-            plt.text(row['stay_month'], row['Score'] + 0.05, f"{row['Score']:.2f}", ha='center')
-        # Set x-ticks from 1 to 12
-        plt.xticks(range(1, 13))
-        # Adjusting the y-axis to start from the minimum average score
-        plt.ylim(bottom=min(average_scores['Score']) - 0.5)
-        #plt.title('Average Score vs. Stay Month')
-        plt.xlabel('Tháng')
-        plt.ylabel('Điểm trung bình')
-        st.pyplot(plt)
-    
-        # Show the count of ratings
-        st.write("#### Phân phối điểm đánh giá")
-        st.bar_chart(selected_hotel['Score'].value_counts())
-    
-        # Calculate average score by Room Type and Group Name
-        st.write("#### Điểm trung bình theo loại phòng và nhóm khách hàng")
-        # average_scores2 = selected_hotel.groupby(['Room Type', 'Group Name'])['Score'].mean().reset_index()
-        # # # Display the average scores
-        # # st.dataframe(average_scores2)
-    
-        # Calculate average score by Room Type and Group Name
-        average_scores2 = (
-            selected_hotel.groupby(['Room Type', 'Group Name'])['Score']
-            .mean()
-            .unstack()
-        )
-        # Create a heatmap
-        plt.figure(figsize=(12, 8))
-        sns.heatmap(average_scores2, annot=True, cmap='coolwarm', fmt='.2f', cbar_kws={'label': 'Average Score'})
-        plt.xlabel('Nhóm khách hàng')
-        plt.ylabel('Loại phòng')
-        st.pyplot(plt)
     
         # # Calculate average score and occurrence count by Room Type and Group Name
         # average_scores2 = (
