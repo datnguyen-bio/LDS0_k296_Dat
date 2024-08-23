@@ -208,18 +208,15 @@ elif choice == '2. Phân tích dữ liệu':
         plt.ylabel('Loại phòng')
         st.pyplot(plt)
 
-        if 'selected_hotel' in st.session_state:
-            # Generate the word cloud
-            text = ' '.join(selected_hotel['Processed_body'])
-            wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
-        
-            # Display the word cloud
-            fig, ax = plt.subplots(figsize=(10, 6))
-            ax.imshow(wordcloud, interpolation='bilinear')
-            ax.set_axis_off()
-            st.pyplot(fig)
-        else:
-            st.write("Chưa chọn nơi lưu trú cần phân tích.")
+        #wordcloud
+        st.write("#### Wordcloud")
+        text = ' '.join(selected_hotel['Processed_body'])
+        wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+        # Display the word cloud
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax.imshow(wordcloud, interpolation='bilinear')
+        ax.set_axis_off()
+        st.pyplot(fig)
 
 elif choice == '3. Sentiment Analysis':
     df_hotels = pd.read_csv('hotel_comments_4.csv')
