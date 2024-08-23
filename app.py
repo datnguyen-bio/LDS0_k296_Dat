@@ -221,12 +221,52 @@ elif choice == '3. Sentiment Analysis':
     df_hotels = pd.read_csv('hotel_comments_4.csv')
     st.subheader("3. Sentiment Analysis")
 
+        # Load the trained models and the TF-IDF vectorizer
+    with open('svm_model.pkl', 'rb') as f:
+        svm_model = pickle.load(f)
+    with open('random_forest_model.pkl', 'rb') as f:
+        random_forest_model = pickle.load(f)
+    with open('naive_bayes_model.pkl', 'rb') as f:
+        naive_bayes_model = pickle.load(f)
+    with open('logistic_regression_model.pkl', 'rb') as f:
+        logistic_regression_model = pickle.load(f)
+    with open('k-nn_model.pkl', 'rb') as f:
+        knn_model = pickle.load(f)
+    with open('decision_tree_model.pkl', 'rb') as f:
+        decision_tree_model = pickle.load(f)
+    with open('tfidf_vectorizer.pkl', 'rb') as f:
+        tfidf_vectorizer = pickle.load(f)
     
-
-
-
+    # Streamlit app
+    st.title("Text Classification")
     
-
+    # Allow the user to enter text
+    user_input = st.text_area("Enter text here:")
+    
+    # Classify the user input using the trained models
+    if st.button("Classify"):
+        if user_input:
+            # Vectorize the user input using the TF-IDF vectorizer
+            X = tfidf_vectorizer.transform([user_input])
+    
+            # Make predictions using the trained models
+            svm_prediction = svm_model.predict(X)[0]
+            random_forest_prediction = random_forest_model.predict(X)[0]
+            naive_bayes_prediction = naive_bayes_model.predict(X)[0]
+            logistic_regression_prediction = logistic_regression_model.predict(X)[0]
+            knn_prediction = knn_model.predict(X)[0]
+            decision_tree_prediction = decision_tree_model.predict(X)[0]
+    
+            # Display the results
+            st.write("SVM Prediction:", svm_prediction)
+            st.write("Random Forest Prediction:", random_forest_prediction)
+            st.write("Naive Bayes Prediction:", naive_bayes_prediction)
+            st.write("Logistic Regression Prediction:", logistic_regression_prediction)
+            st.write("K-NN Prediction:", knn_prediction)
+            st.write("Decision Tree Prediction:", decision_tree_prediction)
+        else:
+            st.write("Please enter some text.")
+    
 elif choice == '4. Recommendation System':
     st.subheader("4. Recommendation System")
     # function cần thiết
