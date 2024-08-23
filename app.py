@@ -30,36 +30,6 @@ elif choice == '1. Lý thuyết':
     - Topic 1: Sentiment Analysis
     - Topic 2: Recommendation System
     - ...""")
-    
-# elif choice == '0. Nhập thông tin cá nhân (test streamlit)':
-#     # Sử dụng các điều khiển nhập
-#     # 1. Text
-#     st.subheader("1. Thông tin cá nhân")
-#     name = st.text_input("Nhập tên bạn")
-#     st.write("Bạn tên là: ", name)
-#     # 2. Slider
-#     st.subheader("2. Slider")
-#     age = st.slider("Tuổi của bạn?", 1, 100, 20)
-#     st.write("Bạn", age, "tuổi.")
-#     # 5. Selectbox
-#     st.subheader("5. Nghề nghiệp của bạn")
-#     occupation = st.selectbox("Bạn đang truy cập với vai trò?", ["Người học", "Giảng viên"])
-#     st.write("Bạn là ", occupation)
-#     # 6. Multiselect
-#     st.subheader("6. Địa điểm cư trú")
-#     location = st.multiselect("Bạn đang sống ở?", ("Hà Nội", "Thành phố Hồ Chí Minh", "Đà Nẵng", "Tỉnh thành khác"))
-#     st.write("Bạn đang sống ở", location)
-   
-#     # Sử dụng điều khiển submit
-#     st.subheader("Submit")
-#     submitted = st.button("Submit")
-#     if submitted:
-#         st.write("You đã nhập thông tin.")
-#         # In các thông tin phía trên khi người dùng nhấn nút Submit
-#         st.write("Bạn tên là: ", name)
-#         st.write("Bạn", age, "tuổi.")
-#         st.write("Bạn là ", occupation)
-#         st.write("Bạn đang sống ở", location)
 
 elif choice == '2. Phân tích dữ liệu':
     df_hotels = pd.read_csv('hotel_comments_4.csv')
