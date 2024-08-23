@@ -233,7 +233,7 @@ elif choice == '3. Sentiment Analysis':
     # Plot the distribution of hotel ratings
     st.write("Distribution of Hotel Ratings:")
     fig, ax = plt.subplots(figsize=(8, 6))
-    sns.histplot(df_hotels['Total_Score'], ax=ax)
+    sns.histplot(df_hotels['Score'], ax=ax)
     st.pyplot(fig)
     
     # Plot the correlation matrix
