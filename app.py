@@ -78,9 +78,9 @@ elif choice == '2. Phân tích dữ liệu':
         selected_hotel = df_hotels[df_hotels['Hotel_ID'] == st.session_state.selected_hotel_id]
 
     # Display the selected hotel information
-        st.write("### Bảng dữ liệu review thô, về khách sạn đã chọn (chỉ bằng tiếng Việt):")
+        st.write("### Bảng dữ liệu review thô, về điểm lưu trú đã chọn (chỉ bằng tiếng Việt):")
         st.dataframe(selected_hotel)
-        st.write("#### Khoảng cách của khách sạn đến bãi biển/trung tâm (theo booking.com)")
+        st.write("#### Khoảng cách của điểm lưu trú đến bãi biển/trung tâm (theo booking.com)")
     
         # Get the distance of the hotel from the selected hotel beachfront
         distance_value = selected_hotel['beachfront'].values[0] if not selected_hotel.empty else None
@@ -97,6 +97,63 @@ elif choice == '2. Phân tích dữ liệu':
             st.write("Không có thông tin về khoảng cách tới trung tâm thành phố.")
         else:
             st.write(f"Khoảng cách đến trung tâm thành phố là {distance_value2} km.")
+
+        #Các kết quả khác của điểm lưu trú
+        # Total Score
+        total_score = selected_hotel['Total_Score'].values[0] if not selected_hotel.empty else None
+        # Show the message based on distance value
+        if pd.isna(total_score):
+            st.write("Không có thông tin về điểm tổng trung bình.")
+        else:
+            st.write(f"Điểm tổng trung bình là {total_score}.")
+
+        # Location
+        location = selected_hotel['Location'].values[0] if not selected_hotel.empty else None
+        # Show the message based on distance value
+        if pd.isna(location):
+            st.write("Không có thông tin về điểm trung bình của vị trí.")
+        else:
+            st.write(f"Điểm vị trí trung bình là {location}.")
+
+        # cleanliness
+        cleanliness = selected_hotel['Cleanliness'].values[0] if not selected_hotel.empty else None
+        # Show the message based on distance value
+        if pd.isna(cleanliness):
+            st.write("Không có thông tin về điểm trung bình của sự sạch sẽ.")
+        else:
+            st.write(f"Điểm sạch sẽ trung bình là {cleanliness}.")
+
+        # service
+        service = selected_hotel['Service'].values[0] if not selected_hotel.empty else None
+        # Show the message based on distance value
+        if pd.isna(service):
+            st.write("Không có thông tin về điểm trung bình của dịch vụ.")
+        else:
+            st.write(f"Điểm dịch vụ trung bình là {service}.")
+
+        # facilities
+        facilities = selected_hotel['Facilities'].values[0] if not selected_hotel.empty else None
+        # Show the message based on distance value
+        if pd.isna(facilities):
+            st.write("Không có thông tin về điểm trung bình của sự tiện nghi.")
+        else:
+            st.write(f"Điểm tiện nghi trung bình là {facilities}.")
+
+        # value
+        value = selected_hotel['Value'].values[0] if not selected_hotel.empty else None
+        # Show the message based on distance value
+        if pd.isna(value):
+            st.write("Không có thông tin về điểm trung bình của sự đáng giá tiền.")
+        else:
+            st.write(f"Điểm đáng giá trung bình là {value}.")
+
+        # comfortandquality
+        comfortandquality = selected_hotel['Comfort_and_room_quality'].values[0] if not selected_hotel.empty else None
+        # Show the message based on distance value
+        if pd.isna(comfortandquality):
+            st.write("Không có thông tin về điểm trung bình của sự thoải mái và chất lượng phòng.")
+        else:
+            st.write(f"Điểm thoải mái và chất lượng phòng trung bình là {comfortandquality}.")
 
         # Show basic statistics
         st.write("#### Thống kê mô tả về khách sạn")
