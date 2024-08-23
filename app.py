@@ -210,7 +210,7 @@ elif choice == '2. Phân tích dữ liệu':
 
         # show word_cloud cột Processed_Body
         # Display the word cloud
-        text = ' '.join(selected_hotel['Processed_Body'])
+        text = selected_hotel['Processed_Body']
         wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
         # Display the word cloud
         fig, ax = plt.subplots(figsize=(10, 6))
