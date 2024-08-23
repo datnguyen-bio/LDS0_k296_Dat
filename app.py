@@ -6,45 +6,47 @@ import seaborn as sns
 
 # Using menu
 st.title("Trung Tâm Tin Học")
-menu = ["0a. Trang chủ trung tâm","0b. testing","0c. Nhập thông tin cá nhân (test streamlit)", "1. Lý thuyết", "2. Phân tích dữ liệu", "3. Sentiment Analysis", "4. Recommendation System"]
+menu = ["0.blank", "1. Lý thuyết", "2. Phân tích dữ liệu", "3. Sentiment Analysis", "4. Recommendation System"]
 choice = st.sidebar.selectbox('Menu', menu)
-if choice == 'Home':    
+if choice == '0.blank':    
     st.subheader("[Trang chủ](https://csc.edu.vn)")  
-elif choice == '0b. testing':    
+    
+elif choice == '1. Lý thuyết':    
     st.subheader("[Đồ án TN Data Science](https://csc.edu.vn/data-science-machine-learning/Do-An-Tot-Nghiep-Data-Science---Machine-Learning_229)")
     st.write("""### Có 2 chủ đề trong khóa học:
     - Topic 1: Sentiment Analysis
     - Topic 2: Recommendation System
     - ...""")
-elif choice == '0. Nhập thông tin cá nhân (test streamlit)':
-    # Sử dụng các điều khiển nhập
-    # 1. Text
-    st.subheader("1. Thông tin cá nhân")
-    name = st.text_input("Nhập tên bạn")
-    st.write("Bạn tên là: ", name)
-    # 2. Slider
-    st.subheader("2. Slider")
-    age = st.slider("Tuổi của bạn?", 1, 100, 20)
-    st.write("Bạn", age, "tuổi.")
-    # 5. Selectbox
-    st.subheader("5. Nghề nghiệp của bạn")
-    occupation = st.selectbox("Bạn đang truy cập với vai trò?", ["Người học", "Giảng viên"])
-    st.write("Bạn là ", occupation)
-    # 6. Multiselect
-    st.subheader("6. Địa điểm cư trú")
-    location = st.multiselect("Bạn đang sống ở?", ("Hà Nội", "Thành phố Hồ Chí Minh", "Đà Nẵng", "Tỉnh thành khác"))
-    st.write("Bạn đang sống ở", location)
+    
+# elif choice == '0. Nhập thông tin cá nhân (test streamlit)':
+#     # Sử dụng các điều khiển nhập
+#     # 1. Text
+#     st.subheader("1. Thông tin cá nhân")
+#     name = st.text_input("Nhập tên bạn")
+#     st.write("Bạn tên là: ", name)
+#     # 2. Slider
+#     st.subheader("2. Slider")
+#     age = st.slider("Tuổi của bạn?", 1, 100, 20)
+#     st.write("Bạn", age, "tuổi.")
+#     # 5. Selectbox
+#     st.subheader("5. Nghề nghiệp của bạn")
+#     occupation = st.selectbox("Bạn đang truy cập với vai trò?", ["Người học", "Giảng viên"])
+#     st.write("Bạn là ", occupation)
+#     # 6. Multiselect
+#     st.subheader("6. Địa điểm cư trú")
+#     location = st.multiselect("Bạn đang sống ở?", ("Hà Nội", "Thành phố Hồ Chí Minh", "Đà Nẵng", "Tỉnh thành khác"))
+#     st.write("Bạn đang sống ở", location)
    
-    # Sử dụng điều khiển submit
-    st.subheader("Submit")
-    submitted = st.button("Submit")
-    if submitted:
-        st.write("You đã nhập thông tin.")
-        # In các thông tin phía trên khi người dùng nhấn nút Submit
-        st.write("Bạn tên là: ", name)
-        st.write("Bạn", age, "tuổi.")
-        st.write("Bạn là ", occupation)
-        st.write("Bạn đang sống ở", location)
+#     # Sử dụng điều khiển submit
+#     st.subheader("Submit")
+#     submitted = st.button("Submit")
+#     if submitted:
+#         st.write("You đã nhập thông tin.")
+#         # In các thông tin phía trên khi người dùng nhấn nút Submit
+#         st.write("Bạn tên là: ", name)
+#         st.write("Bạn", age, "tuổi.")
+#         st.write("Bạn là ", occupation)
+#         st.write("Bạn đang sống ở", location)
 
 elif choice == '1. Lý thuyết':
     # 1.1. Line Chart
@@ -90,7 +92,11 @@ elif choice == '1. Lý thuyết':
     st.pyplot(fig)
 # Done
 
+elif choice == '3. Sentiment Analysis':
+    st.subheader("3. Sentiment Analysis")
+
 elif choice == '4. Recommendation System':
+    st.subheader("4. Recommendation System")
     # function cần thiết
     def get_recommendations(df, hotel_id, cosine_sim, nums=5):
         # Get the index of the hotel that matches the hotel_id
