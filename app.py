@@ -76,13 +76,13 @@ elif choice == '2. Phân tích dữ liệu':
     # Lấy 20 khách sạn
     random_hotels = df_hotels.sample(n=40, random_state=1)
     # print(random_hotels)
+
+    st.session_state.random_hotels = random_hotels
     
     # Kiểm tra xem 'selected_hotel_id' đã có trong session_state hay chưa
     if 'selected_hotel_id' not in st.session_state:
         # Nếu chưa có, thiết lập giá trị mặc định là None hoặc ID khách sạn đầu tiên
         st.session_state.selected_hotel_id = None
-
-    st.session_state.random_hotels = random_hotels
     
     # Theo cách cho người dùng chọn khách sạn từ dropdown
     # Tạo một tuple cho mỗi khách sạn, trong đó phần tử đầu là tên và phần tử thứ hai là ID
