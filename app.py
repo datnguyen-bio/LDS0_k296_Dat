@@ -216,7 +216,7 @@ elif choice == '2. Phân tích dữ liệu':
         ax.imshow(wordcloud, interpolation='bilinear')
         ax.set_axis_off()
         st.pyplot(fig)
-            else:
+    else:
         st.write("Chưa chọn nơi lưu trú cần phân tích.")
 
 elif choice == '3. Sentiment Analysis':
